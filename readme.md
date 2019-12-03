@@ -105,5 +105,7 @@ vec2 moreBezier(in vec2 cp0, in vec2 cp1, in vec2 cp2, in vec2 cp3, in float t) 
 
 ## See Also
 
-- [`bezier`](https://github.com/hughsk/bezier)
-- [`bezier-gen-curve`](https://github.com/yiwenl/bezier-gen-curve)
+- [`bezier`](https://github.com/hughsk/bezier).
+- [`glsl-bezier-curve`](https://github.com/yiwenl/glsl-bezier-curve).
+- [_Animated Bézier Curves_](https://www.jasondavies.com/animated-bezier/).
+- [This interactive graph](https://www.desmos.com/calculator/cahqdxeshd).
