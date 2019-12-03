@@ -4,12 +4,12 @@ const yargs = require('yargs');
 
 const { makeBeziers } = require('.');
 
-const { segments, types, name, mix, output } = yargs
+const { orders, types, name, mix, file } = yargs
     .options({
-        'segments': {
-            alias: 's',
+        'orders': {
+            alias: 'o',
             type: 'array',
-            description: 'Array of numbers of segments in each bezier curve function.'
+            description: 'Array of orders in each bezier curve function.'
         },
         'types': {
             alias: 't',
@@ -27,25 +27,25 @@ const { segments, types, name, mix, output } = yargs
             type: 'string',
             description: 'The name to use for the per-element interpolation function.'
         },
-        'output': {
-            alias: 'o',
+        'file': {
+            alias: 'f',
             type: 'string',
             description: 'The output file path for the bezier function/s.'
         }
     })
     .argv;
 
-const beziers = makeBeziers(((segments && segments.length)? segments : undefined),
+const beziers = makeBeziers(((orders && orders.length)? orders : undefined),
     ((types && types.length)? types : undefined),
     ((name)? name : undefined),
     ((mix)? mix : undefined));
 
-if(output) {
+if(file) {
     const { resolve, dirname } = require('path');
     const { writeFileSync } = require('fs');
     const mkdirp = require('mkdirp');
 
-    const filePath = resolve(output);
+    const filePath = resolve(file);
     const dirPath = dirname(filePath);
 
     mkdirp.sync(dirPath);

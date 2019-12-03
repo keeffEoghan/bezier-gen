@@ -8,17 +8,17 @@ Made with GLSL in mind, but similar languages may be generated if a suitable `mi
 
 ### Bézier Functions
 
-This module produces a series of GLSL bézier functions, for each of the given numbers of segments `S`, and overloaded for each of the given types `T`, named `name`, with the signature:
+This module produces a series of GLSL bézier functions, for each of the given numbers of orders `O`, and overloaded for each of the given types `T`, named `name`, with the signature:
 ```glsl
-T name(T cp0, T cp1, ..., T cp<S-1>, float t);
+T name(T cp0, T cp1, ..., T cp<O-1>, float t);
 ```
 
 The bézier functions may be called as follows (using functions in the pre-generated `*.glsl` files for example):
 ```glsl
-// From `bezier-gen/1d.glsl`
+// 2D 3rd-order bézier function from `bezier-gen/1d.glsl`
 float interpolated = bezier(0.0, 1.0, 2.0, 0.5); // 1.0
 
-// From `bezier-gen/2d.glsl`
+// 2D 3rd-order bézier function from `bezier-gen/2d.glsl`
 vec2 interpolated = bezier(vec2(0.0), vec2(1.0), vec2(2.0), 0.5); // vec2(1.0)
 ```
 
@@ -33,12 +33,12 @@ Using [`bin`](./bin) for command-line:
 # These are equivalent:
 
 # Long form:
-bezier-gen/bin --segments 3 4 5 --types float vec2 vec3 vec4 --name bezier --output ./bezier.glsl
+bezier-gen/bin --orders 3 4 5 --types float vec2 vec3 vec4 --name bezier --file ./bezier.glsl
 
 # Short form:
-bezier-gen/bin -s 3 4 5 -t float vec2 vec3 vec4 -n bezier -o ./bezier.glsl
+bezier-gen/bin -o 3 4 5 -t float vec2 vec3 vec4 -n bezier -f ./bezier.glsl
 
-# Defaults (outputs to console if no `output` file is given):
+# Defaults (outputs to console if no `file` file is given):
 bezier-gen/bin
 ```
 
@@ -109,3 +109,4 @@ vec2 moreBezier(in vec2 cp0, in vec2 cp1, in vec2 cp2, in vec2 cp3, in float t) 
 - [`glsl-bezier-curve`](https://github.com/yiwenl/glsl-bezier-curve).
 - [_Animated Bézier Curves_](https://www.jasondavies.com/animated-bezier/).
 - [This interactive graph](https://www.desmos.com/calculator/cahqdxeshd).
+- [This Wikipedia article](https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Constructing_B.C3.A9zier_curves).
