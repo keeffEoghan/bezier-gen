@@ -12,8 +12,11 @@ const defaultTypesMap = module.exports.defaultTypesMap =
  * @param {number} [segments=3] The number of segments (control points) in the bézier.
  * @param {string} [type='float'] The data type of the bézier function.
  * @param {string} [name='bezier'] The name of the bézier function.
+ * @param {string} [mix='mix'] The name of the per-element interpolation function; may
+ *     be the name for any externally-defined functiion with the same behaviour and
+ *     arguments as the GLSL `mix`.
  */
-function makeBezier(segments = 3, type = 'float', name = 'bezier') {
+function makeBezier(segments = 3, type = 'float', name = 'bezier', mix = 'mix') {
     segments = Math.abs(segments | 0);
 
     if(!segments) {
@@ -26,17 +29,17 @@ function makeBezier(segments = 3, type = 'float', name = 'bezier') {
             fn += '    return cp0;\n';
         }
         else if(segments < 3) {
-            fn += '    return mix(cp0, cp1, t);\n';
+            fn += `    return ${mix}(cp0, cp1, t);\n`;
         }
         else {
             for(let n = segments-1; n > 0; --n) {
                 for(let i = 0; i < n; ++i) {
                     fn += '    '+
                         ((n === segments-1)?
-                            `${type} p${i} = mix(cp${i}, cp${i+1}, t);`
+                            `${type} p${i} = ${mix}(cp${i}, cp${i+1}, t);`
                         : ((n > 1)?
-                            `p${i} = mix(p${i}, p${i+1}, t);`
-                        :   `return mix(p${i}, p${i+1}, t);`))+
+                            `p${i} = ${mix}(p${i}, p${i+1}, t);`
+                        :   `return ${mix}(p${i}, p${i+1}, t);`))+
                         '\n';
                 }
 

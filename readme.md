@@ -22,6 +22,8 @@ float interpolated = bezier(0.0, 1.0, 2.0, 0.5); // 1.0
 vec2 interpolated = bezier(vec2(0.0), vec2(1.0), vec2(2.0), 0.5); // vec2(1.0)
 ```
 
+The implementations make use of a per-element `mix` function - this assumes GLSL's `mix`, but the name of a different externally-defined function may be passed as the final argument to the generator.
+
 ### Generating
 
 You can use the pre-generated `*.glsl` files, or generate your own bézier functions using the generator files:

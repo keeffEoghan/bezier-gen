@@ -4,7 +4,7 @@ const yargs = require('yargs');
 
 const { makeBeziers } = require('.');
 
-const { segments, types, name, output } = yargs
+const { segments, types, name, mix, output } = yargs
     .options({
         'segments': {
             alias: 's',
@@ -22,6 +22,11 @@ const { segments, types, name, output } = yargs
             type: 'string',
             description: 'The name to use for the (overloaded) bezier curve function/s.'
         },
+        'mix': {
+            alias: 'm',
+            type: 'string',
+            description: 'The name to use for the per-element interpolation function.'
+        },
         'output': {
             alias: 'o',
             type: 'string',
@@ -32,7 +37,8 @@ const { segments, types, name, output } = yargs
 
 const beziers = makeBeziers(((segments && segments.length)? segments : undefined),
     ((types && types.length)? types : undefined),
-    ((name)? name : undefined));
+    ((name)? name : undefined),
+    ((mix)? mix : undefined));
 
 if(output) {
     const { resolve, dirname } = require('path');
