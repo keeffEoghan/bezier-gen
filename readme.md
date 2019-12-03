@@ -15,10 +15,10 @@ T name(T cp0, T cp1, ..., T cpS, float t);
 
 The bézier functions may be called as follows (using functions in the pre-generated `*.glsl` files for example):
 ```glsl
-// From `bezier-gen/float.glsl`
+// From `bezier-gen/1d.glsl`
 float interpolated = bezier(0.0, 1.0, 2.0, 0.5); // 1.0
 
-// From `bezier-gen/vec2.glsl`
+// From `bezier-gen/2d.glsl`
 vec2 interpolated = bezier(vec2(0.0), vec2(1.0), vec2(2.0), 0.5); // vec2(1.0)
 ```
 
