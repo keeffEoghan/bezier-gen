@@ -10,7 +10,7 @@ Made with GLSL in mind, but similar languages may be generated if a suitable `mi
 
 This module produces a series of GLSL bézier functions, for each of the given numbers of segments `S`, and overloaded for each of the given types `T`, named `name`, with the signature:
 ```glsl
-T name(T cp0, T cp1, ..., T cpS, float t);
+T name(T cp0, T cp1, ..., T cp<S-1>, float t);
 ```
 
 The bézier functions may be called as follows (using functions in the pre-generated `*.glsl` files for example):
