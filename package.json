@@ -1,0 +1,22 @@
+{
+  "name": "glsl-bezier",
+  "version": "1.0.0",
+  "description": "GLSL bezier curve functions and Node code generator - for functions with any `mix`-able type/dimension, and any number of control points.",
+  "main": "index.js",
+  "browser": "index.glsl",
+  "repository": "https://github.com/keeffEoghan/glsl-bezier",
+  "author": "Eoghan O'Keeffe <epok.tech@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "10.16.3",
+    "yarn": "1.19.0"
+  },
+  "scripts": {
+    "start": "yarn run build -o ./index.glsl",
+    "build": "./bin"
+  },
+  "devDependencies": {
+    "mkdirp": "^0.5.1",
+    "yargs": "^15.0.2"
+  }
+}

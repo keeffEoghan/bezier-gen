@@ -1,0 +1,50 @@
+#!/usr/bin/env node
+
+const yargs = require('yargs');
+
+const { makeBeziers } = require('.');
+
+const { segments, types, name, output } = yargs
+    .options({
+        'segments': {
+            alias: 's',
+            type: 'array',
+            description: 'Array of numbers of segments in each bezier curve function.'
+        },
+        'types': {
+            alias: 't',
+            type: 'array',
+            description: 'The GLSL type (dimension) of each bezier curve function - '+
+                'may be any GLSL `mix`-able type (`float`, `vec2`, `vec3`, `vec4`).'
+        },
+        'name': {
+            alias: 'n',
+            type: 'string',
+            description: 'The name to use for the (overloaded) bezier curve function/s.'
+        },
+        'output': {
+            alias: 'o',
+            type: 'string',
+            description: 'The output file path for the bezier function/s.'
+        }
+    })
+    .argv;
+
+const beziers = makeBeziers(((segments && segments.length)? segments : undefined),
+    ((types && types.length)? types : undefined),
+    ((name)? name : undefined));
+
+if(output) {
+    const { resolve, dirname } = require('path');
+    const { writeFileSync } = require('fs');
+    const mkdirp = require('mkdirp');
+
+    const filePath = resolve(output);
+    const dirPath = dirname(filePath);
+
+    mkdirp.sync(dirPath);
+    writeFileSync(filePath, beziers);
+}
+else {
+    process.stdout.write(beziers);
+}
