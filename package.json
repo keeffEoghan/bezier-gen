@@ -1,5 +1,5 @@
 {
-  "name": "glsl-bezier",
+  "name": "bezier-gen",
   "version": "1.0.0",
   "description": "GLSL bezier curve functions and Node code generator - for functions with any `mix`-able type/dimension, and any number of control points.",
   "main": "index.js",
@@ -12,8 +12,20 @@
     "yarn": "1.19.0"
   },
   "scripts": {
-    "start": "yarn run build -o ./index.glsl",
-    "build": "./bin"
+    "start": "yarn run build:floats && yarn run build:vec2s && yarn run build:vec3s && yarn run build:vec4s",
+    "build": "./bin",
+    "build:float": "yarn run build -s 3 4 5 -t float -o ./float.glsl",
+    "build:float-hi": "yarn run build -s 6 7 8 -t float -o ./float-hi.glsl",
+    "build:floats": "yarn run build:float && yarn run build:float-hi",
+    "build:vec2": "yarn run build -s 3 4 -t vec2 -o ./vec2.glsl",
+    "build:vec2-hi": "yarn run build -s 6 7 8 -t vec2 -o ./vec2-hi.glsl",
+    "build:vec2s": "yarn run build:vec2 && yarn run build:vec2-hi",
+    "build:vec3": "yarn run build -s 3 4 -t vec3 -o ./vec3.glsl",
+    "build:vec3-hi": "yarn run build -s 6 7 8 -t vec3 -o ./vec3-hi.glsl",
+    "build:vec3s": "yarn run build:vec3 && yarn run build:vec3-hi",
+    "build:vec4": "yarn run build -s 3 4 -t vec4 -o ./vec4.glsl",
+    "build:vec4-hi": "yarn run build -s 6 7 8 -t vec4 -o ./vec4-hi.glsl",
+    "build:vec4s": "yarn run build:vec4 && yarn run build:vec4-hi"
   },
   "devDependencies": {
     "mkdirp": "^0.5.1",
