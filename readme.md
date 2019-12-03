@@ -121,3 +121,4 @@ vec2 moreBezier(in vec2 cp0, in vec2 cp1, in vec2 cp2, in vec2 cp3, in float t) 
 ## See Also
 
 - [`bezier`](https://github.com/hughsk/bezier)
+- [`glsl-bezier-curve`](https://github.com/yiwenl/glsl-bezier-curve)
