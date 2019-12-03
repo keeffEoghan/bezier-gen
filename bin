@@ -1,44 +1,53 @@
 #!/usr/bin/env node
 
-const yargs = require('yargs');
+const yargs = require('yargs').options({
+    'orders': {
+        alias: 'o',
+        type: 'array',
+        default: undefined,
+        description: 'Array of orders of each bezier curve function.'
+    },
+    'types': {
+        alias: 't',
+        type: 'array',
+        default: undefined,
+        description: 'The data type (dimension) of each bezier curve function; '+
+            'may be any GLSL `mix`-able type (`float`, `vec2`, `vec3`, `vec4`).'
+    },
+    'name': {
+        alias: 'n',
+        type: 'string',
+        default: undefined,
+        description: 'The name to use for the (overloaded) bezier curve function/s.'
+    },
+    'mix': {
+        alias: 'm',
+        type: 'string',
+        default: undefined,
+        description: 'The name to use for the per-element interpolation function.'
+    },
+    'pre': {
+        type: 'string',
+        default: undefined,
+        description: 'Any prefix text to include.'
+    },
+    'suf': {
+        type: 'string',
+        default: undefined,
+        description: 'Any suffix text to include; by default, does `glslify` export.'
+    },
+    'file': {
+        alias: 'f',
+        type: 'string',
+        default: undefined,
+        description: 'The output file path for the generated code.'
+    }
+});
 
+const { orders, types, name, mix, pre, suf, file } = yargs.argv;
 const { makeBeziers } = require('.');
 
-const { orders, types, name, mix, file } = yargs
-    .options({
-        'orders': {
-            alias: 'o',
-            type: 'array',
-            description: 'Array of orders in each bezier curve function.'
-        },
-        'types': {
-            alias: 't',
-            type: 'array',
-            description: 'The GLSL type (dimension) of each bezier curve function - '+
-                'may be any GLSL `mix`-able type (`float`, `vec2`, `vec3`, `vec4`).'
-        },
-        'name': {
-            alias: 'n',
-            type: 'string',
-            description: 'The name to use for the (overloaded) bezier curve function/s.'
-        },
-        'mix': {
-            alias: 'm',
-            type: 'string',
-            description: 'The name to use for the per-element interpolation function.'
-        },
-        'file': {
-            alias: 'f',
-            type: 'string',
-            description: 'The output file path for the bezier function/s.'
-        }
-    })
-    .argv;
-
-const beziers = makeBeziers(((orders && orders.length)? orders : undefined),
-    ((types && types.length)? types : undefined),
-    ((name)? name : undefined),
-    ((mix)? mix : undefined));
+const beziers = makeBeziers(orders, types, name, mix, pre, suf);
 
 if(file) {
     const { resolve, dirname } = require('path');
