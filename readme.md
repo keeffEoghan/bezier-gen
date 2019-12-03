@@ -38,7 +38,7 @@ bezier-gen/bin --orders 3 4 5 --types float vec2 vec3 vec4 --name bezier --file 
 # Short form:
 bezier-gen/bin -o 3 4 5 -t float vec2 vec3 vec4 -n bezier -f ./bezier.glsl
 
-# Defaults (outputs to console if no `file` file is given):
+# Defaults (outputs to console if no `file` is given):
 bezier-gen/bin
 ```
 
