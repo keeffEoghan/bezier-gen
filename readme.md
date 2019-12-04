@@ -108,18 +108,20 @@ vec2 moreBezier(vec2 cp0, vec2 cp1, vec2 cp2, vec2 cp3, float t) {
 ```
 
 The options for the top-level generators are:
-- `orders` (JS), or `--orders`/`-o` (CLI): Array of orders of each bezier curve function.
-- `types` (JS), or `--types`/`-t` (CLI): The data type (dimension) of each bezier curve function; may be any GLSL `mix`-able type (`float`, `vec2`, `vec3`, `vec4`).
-- `name` (JS), or `--name`/`-n` (CLI): The name to use for the (overloaded) bezier curve function/s.
-- `mix` (JS), or `--mix`/`-m` (CLI): The name to use for the per-element interpolation function.
+
+- `orders` (JS), or `--orders`/`-o` (CLI): Array of orders (number of control points) of each bézier curve function.
+- `types` (JS), or `--types`/`-t` (CLI): The data type (dimension) of each bézier curve function; may be any `mix`-able type (for GLSL: `float`, `vec2`, `vec3`, `vec4`).
+- `name` (JS), or `--name`/`-n` (CLI): The name to use for the (overloaded) bézier curve function/s.
+- `mix` (JS), or `--mix`/`-m` (CLI): The name of the per-element (linear) interpolation function; may be the name for any externally-defined function with the same behaviour and arguments as the GLSL `mix`.
 - `pre` (JS), or `--pre` (CLI): Any prefix text to include.
-- `suf` (JS), or `--suf` (CLI): Any suffix text to include.
+- `suf` (JS), or `--suf` (CLI): Any suffix text to include; by default, does `glslify` export.
 - `file` (JS), or `--file`/`-f` (CLI): The output file path for the generated code.
 
 ## See Also
 
 - [`bezier`](https://github.com/hughsk/bezier).
 - [`glsl-bezier-curve`](https://github.com/yiwenl/glsl-bezier-curve).
+- [`glslify`](https://github.com/glslify/glslify).
 - [_Animated Bézier Curves_](https://www.jasondavies.com/animated-bezier/).
 - [This interactive graph](https://www.desmos.com/calculator/cahqdxeshd).
 - [This Wikipedia article](https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Constructing_B.C3.A9zier_curves).

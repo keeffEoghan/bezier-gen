@@ -5,26 +5,29 @@ const yargs = require('yargs').options({
         alias: 'o',
         type: 'array',
         default: undefined,
-        description: 'Array of orders of each bezier curve function.'
+        description: 'Array of orders (number of control points) of each bézier curve '+
+            'function.'
     },
     'types': {
         alias: 't',
         type: 'array',
         default: undefined,
-        description: 'The data type (dimension) of each bezier curve function; '+
-            'may be any GLSL `mix`-able type (`float`, `vec2`, `vec3`, `vec4`).'
+        description: 'The data type (dimension) of each bézier curve function; '+
+            'may be any `mix`-able type (for GLSL: `float`, `vec2`, `vec3`, `vec4`).'
     },
     'name': {
         alias: 'n',
         type: 'string',
         default: undefined,
-        description: 'The name to use for the (overloaded) bezier curve function/s.'
+        description: 'The name to use for the (overloaded) bézier curve function/s.'
     },
     'mix': {
         alias: 'm',
         type: 'string',
         default: undefined,
-        description: 'The name to use for the per-element interpolation function.'
+        description: 'The name of the per-element (linear) interpolation function; '+
+            'may be the name for any externally-defined function with the same '+
+            'behaviour and arguments as the GLSL `mix`.'
     },
     'pre': {
         type: 'string',
@@ -44,10 +47,10 @@ const yargs = require('yargs').options({
     }
 });
 
-const { orders, types, name, mix, pre, suf, file } = yargs.argv;
 const { makeBeziers } = require('.');
 
-const beziers = makeBeziers(orders, types, name, mix, pre, suf);
+const beziers = makeBeziers(yargs.argv);
+const { file } = yargs.argv;
 
 if(file) {
     const { resolve, dirname } = require('path');

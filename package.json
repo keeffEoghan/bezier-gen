@@ -1,6 +1,6 @@
 {
   "name": "bezier-gen",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "GLSL bezier curve functions and Node code generator - for functions with any `mix`-able type/dimension, and any number of control points.",
   "main": "index.js",
   "repository": "https://github.com/keeffEoghan/glsl-bezier",

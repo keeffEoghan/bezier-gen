@@ -20,12 +20,17 @@ const defaults = module.exports.defaults = {
  *
  * @see [This Wikipedia article](https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Constructing_B.C3.A9zier_curves)
  *
- * @param {number} [order=3] The order (number of control points) in the bézier.
- * @param {string} [type='float'] The data type of the bézier function.
- * @param {string} [name='bezier'] The name of the bézier function.
- * @param {string} [mix='mix'] The name of the per-element interpolation function; may
- *     be the name for any externally-defined functiion with the same behaviour and
- *     arguments as the GLSL `mix`.
+ * @param {number} [order=defaults.order] The order (number of control points) in the
+ *     bézier function.
+ * @param {string} [type=defaults.type] The data type (dimension) of the bézier curve
+ *     function; may be any `mix`-able type (for GLSL: `float`, `vec2`, `vec3`, `vec4`).
+ * @param {string} [name=defaults.name] The name to use for the (overloaded) bézier
+ *     curve function.
+ * @param {string} [mix=defaults.mix] The name of the per-element (linear)
+ *     interpolation function; may be the name for any externally-defined function with
+ *     the same behaviour and arguments as the GLSL `mix`.
+ *
+ * @returns {string} The generated code of the bézier curve function.
  */
 function makeBezier(order = defaults.order, ...rest) {
     if(isNaN(order) && rest.length === 0) {
@@ -77,26 +82,35 @@ function makeBezier(order = defaults.order, ...rest) {
 module.exports.makeBezier = makeBezier;
 
 /**
- * Generate a series of the above
+ * Generate a series of the above, one for each combination of the given `orders` and
+ * `types`.
  *
- * @param {*} orders
- * @param {*} types
- * @param {*} name
- * @param {*} mix
+ * @param {array.<number>} [order=defaults.orders] Array of orders (number of control
+ *     points) of each bézier curve function.
+ * @param {array.<string>} [type=defaults.types] The data type (dimension) of each
+ *     bézier curve function; may be any `mix`-able type (for GLSL: `float`, `vec2`,
+ *     `vec3`, `vec4`).
+ * @param {string} [name=defaults.name] The name to use for the (overloaded) bézier
+ *     curve function/s.
+ * @param {string} [mix=defaults.mix] The name of the per-element interpolation
+ *     function; may be the name for any externally-defined functiion with the same
+ *     behaviour and arguments as the GLSL `mix`.
  * @param {string} [pre] Any prefix text to include.
  * @param {string} [suf] Any suffix text to include; by default, does `glslify` export.
+ *
+ * @returns {string} The generated code of the bézier curve function/s.
  */
 function makeBeziers(orders = defaults.orders, ...rest) {
     if(!Array.isArray(orders) && rest.length === 0) {
-        const { orders: o, types: t, name: n, mix: m } = order;
+        const { orders: o, types: t, name: n, mix: m } = orders;
 
-        return makeBezier(o, t, n, m);
+        return makeBeziers(o, t, n, m);
     }
 
     const [
             types = defaults.types,
-            name,
-            mix,
+            name = defaults.name,
+            mix = defaults.mix,
             pre = defaults.pre(name),
             suf = defaults.suf(name)
         ] = rest;
