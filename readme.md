@@ -1,6 +1,6 @@
 # `bezier-gen`
 
-Bézier curve functions and Node code generator - creates functions with any `mix`-able type/dimension, and any number of control points, for GLSL-like languages.
+Béziers from Node code generator - for any `mix`-able type/dimension, any number of control points, GLSL or similar.
 
 Made with GLSL in mind, but similar languages may be generated if a suitable `mix` function and behaviour is also provided.
 
@@ -26,7 +26,7 @@ The implementations make use of a per-element `mix` function - this assumes GLSL
 
 ### Generating
 
-You can use the pre-generated `*.glsl` files, or generate your own bézier functions using the generator files:
+You can use the pre-generated `*.glsl` files, or generate your own bézier functions (for GLSL or similar) using the generator files:
 
 Using [`bin`](./bin) for command-line:
 ```bash
