@@ -1,6 +1,6 @@
 {
   "name": "@epok.tech/bezier-gen",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Béziers from Node code generator - for any `mix`-able type/dimension, any number of control points, GLSL or similar.",
   "main": "index.js",
   "repository": {

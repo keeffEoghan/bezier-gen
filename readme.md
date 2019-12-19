@@ -4,6 +4,17 @@ Béziers from Node code generator - for any `mix`-able type/dimension, any numbe
 
 Made with GLSL in mind, but similar languages may be generated if a suitable `mix` function and behaviour is also provided.
 
+## Installation
+
+Install from [`npm`](https://www.npmjs.com/package/@epok.tech/bezier-gen) using:
+```bash
+npm install @epok.tech/bezier-gen
+```
+or:
+```bash
+yarn add @epok.tech/bezier-gen
+```
+
 ## Usage
 
 ### Bézier Functions
