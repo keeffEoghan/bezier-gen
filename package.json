@@ -1,6 +1,6 @@
 {
   "name": "@epok.tech/bezier-gen",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Béziers from Node code generator - for any `mix`-able type/dimension, any number of control points, GLSL or similar.",
   "main": "index.js",
   "repository": {
@@ -10,8 +10,8 @@
   "author": "Eoghan O'Keeffe <epok.tech@gmail.com> (https://epok.tech)",
   "license": "MIT",
   "engines": {
-    "node": "10.16.3",
-    "yarn": "1.19.0"
+    "node": ">= 12.14.1",
+    "yarn": ">= 1.22.0"
   },
   "scripts": {
     "start": "yarn run build:1d && yarn run build:2d && yarn run build:3d && yarn run build:4d",
